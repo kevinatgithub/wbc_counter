@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.bobongmd.app.a1cytewbcdifferentialcounter">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.1CYTE">
+        <activity
+            android:name=".Login"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Register"
+            android:screenOrientation="portrait" />
+        <activity android:name=".ShowServerResponse" />
+        <activity
+            android:name=".PatientList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".RegisterPatient"
+            android:screenOrientation="portrait" />
+        <activity android:name=".PatientPreview" />
+        <activity android:name=".CounterParameters" />
+        <activity
+            android:name=".Counter1"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Counter4"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Counter6"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".Counter8"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".CountResult"
+            android:screenOrientation="portrait" />
+        <activity android:name=".BloodCellReferences" android:screenOrientation="landscape"></activity>
+    </application>
+
+</manifest>
