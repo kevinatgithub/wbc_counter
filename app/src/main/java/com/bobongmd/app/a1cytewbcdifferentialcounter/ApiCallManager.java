@@ -40,6 +40,8 @@ public class ApiCallManager {
     private final String API_PATIENT_REGISTER = "http://bobong.getsandbox.com/patient/register";
     private final String API_UPDATE_PATIENT = "http://bobong.getsandbox.com/patient/update";
     private final String API_DELETE_PATIENT = "http://bobong.getsandbox.com/patient";
+    private final String API_GET_CELLS = "http://bobong.getsandbox.com/cells";
+    private final String API_CELL = "http://bobong.getsandbox.com/cell";
 
     private Activity activity;
     private RequestQueue requestQueue;
@@ -117,12 +119,7 @@ public class ApiCallManager {
         HashMap<String, String> headers = new HashMap<String, String>();
         headers.put("patient", gson.toJson(patient));
 
-        call(API_UPDATE_PATIENT, Request.Method.PUT, headers, new CallbackWithResponse() {
-            @Override
-            public void execute(JSONObject response) {
-                callback.execute(response);
-            }
-        },null);
+        call(API_UPDATE_PATIENT, Request.Method.PUT, headers, callback,null);
 
     }
 
@@ -131,6 +128,35 @@ public class ApiCallManager {
         headers.put("patient_id",patient_id);
 
         call(API_DELETE_PATIENT, Request.Method.DELETE,headers,callback,null);
+    }
+    
+    void getCells(CallbackWithResponse callback){
+        get(API_GET_CELLS,callback,null);
+    }
+
+    void registerCell(BloodCell cell, CallbackWithResponse callback){
+        HashMap<String,String> headers = new HashMap<String, String>();
+        headers.put("name",cell.getName());
+        headers.put("shortname",cell.getShortname());
+        headers.put("img",cell.getImg());
+
+        call(API_CELL,Request.Method.POST,headers,callback,null);
+    }
+
+    void updateCell(BloodCell cell, CallbackWithResponse callback){
+        HashMap<String,String> headers = new HashMap<String, String>();
+        headers.put("name",cell.getName());
+        headers.put("shortname",cell.getShortname());
+        headers.put("img",cell.getImg());
+
+        call(API_CELL,Request.Method.PUT,headers,callback,null);
+    }
+
+    void deleteCell(String cellName, CallbackWithResponse callback){
+        HashMap<String,String> headers = new HashMap<String, String>();
+        headers.put("name",cellName);
+
+        call(API_CELL,Request.Method.DELETE,headers,callback,null);
     }
 
     private void get(final String URL, final CallbackWithResponse CALLBACK, @Nullable final Callback ON_ERROR_CALLBACK){

@@ -11,15 +11,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-
-import static com.bobongmd.app.a1cytewbcdifferentialcounter.AppConstants.ATYPICAL_LYMPHOCYTE;
-import static com.bobongmd.app.a1cytewbcdifferentialcounter.AppConstants.BLOOD_CELLS;
 
 public class CounterParameters extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
@@ -29,19 +27,7 @@ public class CounterParameters extends AppCompatActivity implements CompoundButt
     private Spinner spinner_typeOfCounter;
     private Spinner spinner_cellsToBeCounted;
 
-    private CheckBox cb_atypical_lymphocyte;
-    private CheckBox cb_band;
-    private CheckBox cb_basophil;
-    private CheckBox cb_eosinophil;
-    private CheckBox cb_lymphoblast;
-    private CheckBox cb_lymphocyte;
-    private CheckBox cb_metamyelocyte;
-    private CheckBox cb_monocyte;
-    private CheckBox cb_myeloblast;
-    private CheckBox cb_myelocyte;
-    private CheckBox cb_neutrophil;
-    private CheckBox cb_nrbc;
-    private CheckBox cb_promyelocyte;
+    private LinearLayout ll_cells;
     private TextView lbl_order;
 
     private Button btn_save;
@@ -60,7 +46,7 @@ public class CounterParameters extends AppCompatActivity implements CompoundButt
         patient = session.getPatient();
 
         spinner_typeOfCounter = findViewById(R.id.spinner_typeOfCounter);
-        String[] items = new String[]{"1","4","6","8"};
+        String[] items = new String[]{"1","4","6","8","12"};
         ArrayAdapter<String> typeofCounterAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,items);
         spinner_typeOfCounter.setAdapter(typeofCounterAdapter);
 
@@ -76,37 +62,18 @@ public class CounterParameters extends AppCompatActivity implements CompoundButt
         ArrayAdapter<String> cellsToBeCountedAdapter = new ArrayAdapter<>(this,android.R.layout.simple_spinner_dropdown_item,items2);
         spinner_cellsToBeCounted.setAdapter(cellsToBeCountedAdapter);
 
-        cb_atypical_lymphocyte = findViewById(R.id.cb_atypical_lymphocyte);
-        cb_band = findViewById(R.id.cb_band);
-        cb_basophil = findViewById(R.id.cb_basophil);
-        cb_eosinophil = findViewById(R.id.cb_eosinophil);
-        cb_lymphoblast = findViewById(R.id.cb_lymphoblast);
-        cb_lymphocyte = findViewById(R.id.cb_lymphocyte);
-        cb_metamyelocyte = findViewById(R.id.cb_metamyelocyte);
-        cb_monocyte = findViewById(R.id.cb_monocyte);
-        cb_myeloblast = findViewById(R.id.cb_myeloblast);
-        cb_myelocyte = findViewById(R.id.cb_myelocyte);
-        cb_neutrophil = findViewById(R.id.cb_neutrophil);
-        cb_nrbc = findViewById(R.id.cb_nrbc);
-        cb_promyelocyte = findViewById(R.id.cb_promyelocyte);
+        ll_cells = findViewById(R.id.ll_cells);
+        for(BloodCell bc : session.getCellCollection().getCells()){
+            CheckBox cb = new CheckBox(getApplicationContext());
+            cb.setText(bc.getName());
+            cb.setOnCheckedChangeListener(this);
+            ll_cells.addView(cb);
+        }
 
         lbl_order = findViewById(R.id.lbl_order);
 
         selections = new ArrayList<String>();
 
-        cb_atypical_lymphocyte.setOnCheckedChangeListener(this);
-        cb_band.setOnCheckedChangeListener(this);
-        cb_basophil.setOnCheckedChangeListener(this);
-        cb_eosinophil.setOnCheckedChangeListener(this);
-        cb_lymphoblast.setOnCheckedChangeListener(this);
-        cb_lymphocyte.setOnCheckedChangeListener(this);
-        cb_metamyelocyte.setOnCheckedChangeListener(this);
-        cb_monocyte.setOnCheckedChangeListener(this);
-        cb_myeloblast.setOnCheckedChangeListener(this);
-        cb_myelocyte.setOnCheckedChangeListener(this);
-        cb_neutrophil.setOnCheckedChangeListener(this);
-        cb_nrbc.setOnCheckedChangeListener(this);
-        cb_promyelocyte.setOnCheckedChangeListener(this);
 
         btn_save = findViewById(R.id.btn_save);
         btn_save.setOnClickListener(new View.OnClickListener() {
@@ -119,19 +86,10 @@ public class CounterParameters extends AppCompatActivity implements CompoundButt
 
     private void clearSelections() {
         selections = new ArrayList<String>();
-        cb_atypical_lymphocyte.setChecked(false);
-        cb_band.setChecked(false);
-        cb_basophil.setChecked(false);
-        cb_eosinophil.setChecked(false);
-        cb_lymphoblast.setChecked(false);
-        cb_lymphocyte.setChecked(false);
-        cb_metamyelocyte.setChecked(false);
-        cb_monocyte.setChecked(false);
-        cb_myeloblast.setChecked(false);
-        cb_myelocyte.setChecked(false);
-        cb_neutrophil.setChecked(false);
-        cb_nrbc.setChecked(false);
-        cb_promyelocyte.setChecked(false);
+        for(int i = 0; i < ll_cells.getChildCount(); i++){
+            CheckBox cb = (CheckBox) ll_cells.getChildAt(i);
+            cb.setChecked(false);
+        }
         showAllCells();
     }
 
@@ -146,10 +104,10 @@ public class CounterParameters extends AppCompatActivity implements CompoundButt
         for(String cell : selections){
 
             // TODO: 01/12/2018 This should be avoided
-            BloodCell c = ATYPICAL_LYMPHOCYTE;
+            BloodCell c = session.getCellCollection().getCells()[0];
 
-            for(BloodCell bloodCell : BLOOD_CELLS){
-                if(cell.toUpperCase().equals(bloodCell.getName())){
+            for(BloodCell bloodCell : session.getCellCollection().getCells()){
+                if(cell.equals(bloodCell.getName())){
                     c = bloodCell;
                 }
             }
@@ -181,6 +139,9 @@ public class CounterParameters extends AppCompatActivity implements CompoundButt
             case "8":
                 intent = new Intent(getApplicationContext(),Counter8.class);
                 break;
+            case "12":
+                intent = new Intent(getApplicationContext(),Counter12.class);
+                break;
                 default:
                     intent = new Intent(getApplicationContext(),Counter1.class);
         }
@@ -200,8 +161,6 @@ public class CounterParameters extends AppCompatActivity implements CompoundButt
     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
         if(b){
             selections.add(compoundButton.getText().toString());
-
-
         }else{
             selections.remove(compoundButton.getText().toString());
         }
@@ -221,72 +180,18 @@ public class CounterParameters extends AppCompatActivity implements CompoundButt
     }
 
     private void hideUnselectedCells() {
-        if(!cb_atypical_lymphocyte.isChecked()){
-            cb_atypical_lymphocyte.setEnabled(false);
-        }
-
-        if(!cb_band.isChecked()){
-            cb_band.setEnabled(false);
-        }
-
-        if(!cb_basophil.isChecked()){
-            cb_basophil.setEnabled(false);
-        }
-
-        if(!cb_eosinophil.isChecked()){
-            cb_eosinophil.setEnabled(false);
-        }
-
-        if(!cb_lymphoblast.isChecked()){
-            cb_lymphoblast.setEnabled(false);
-        }
-
-        if(!cb_lymphocyte.isChecked()){
-            cb_lymphocyte.setEnabled(false);
-        }
-
-        if(!cb_metamyelocyte.isChecked()){
-            cb_metamyelocyte.setEnabled(false);
-        }
-
-        if(!cb_monocyte.isChecked()){
-            cb_monocyte.setEnabled(false);
-        }
-
-        if(!cb_myeloblast.isChecked()){
-            cb_myeloblast.setEnabled(false);
-        }
-
-        if(!cb_myelocyte.isChecked()){
-            cb_myelocyte.setEnabled(false);
-        }
-
-        if(!cb_neutrophil.isChecked()){
-            cb_neutrophil.setEnabled(false);
-        }
-
-        if(!cb_nrbc.isChecked()){
-            cb_nrbc.setEnabled(false);
-        }
-
-        if(!cb_promyelocyte.isChecked()){
-            cb_promyelocyte.setEnabled(false);
+        for(int i = 0; i < ll_cells.getChildCount(); i++){
+            CheckBox cb = (CheckBox) ll_cells.getChildAt(i);
+            if(!cb.isChecked()){
+                cb.setEnabled(false);
+            }
         }
     }
 
     private void showAllCells(){
-        cb_atypical_lymphocyte.setEnabled(true);
-        cb_band.setEnabled(true);
-        cb_basophil.setEnabled(true);
-        cb_eosinophil.setEnabled(true);
-        cb_lymphoblast.setEnabled(true);
-        cb_lymphocyte.setEnabled(true);
-        cb_metamyelocyte.setEnabled(true);
-        cb_monocyte.setEnabled(true);
-        cb_myeloblast.setEnabled(true);
-        cb_myelocyte.setEnabled(true);
-        cb_neutrophil.setEnabled(true);
-        cb_nrbc.setEnabled(true);
-        cb_promyelocyte.setEnabled(true);
+        for(int i = 0; i < ll_cells.getChildCount(); i++){
+            CheckBox cb = (CheckBox) ll_cells.getChildAt(i);
+            cb.setEnabled(true);
+        }
     }
 }

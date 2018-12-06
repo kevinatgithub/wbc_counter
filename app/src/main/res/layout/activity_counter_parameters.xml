@@ -16,18 +16,20 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_left_w"
-            app:title="SET COUNTER PARAMETERS"
+            app:title="SET COUNTER"
             app:titleTextColor="#ffffff" />
     </android.support.design.widget.AppBarLayout>
 
     <ScrollView
         android:layout_width="0dp"
-        android:layout_height="558dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="?attr/actionBarSize"
+        app:layout_constraintBottom_toTopOf="@+id/lbl_order"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -79,161 +81,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
 
-            <CheckBox
-                android:id="@+id/cb_atypical_lymphocyte"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Atypical Lymphocyte"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_cellsToBeCounted" />
-
-            <CheckBox
-                android:id="@+id/cb_band"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Band"
-                app:layout_constraintStart_toEndOf="@+id/cb_atypical_lymphocyte"
-                app:layout_constraintTop_toBottomOf="@+id/spinner_cellsToBeCounted" />
-
-            <CheckBox
-                android:id="@+id/cb_basophil"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Basophil"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_atypical_lymphocyte" />
-
-            <CheckBox
-                android:id="@+id/cb_eosinophil"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Eosinophil"
-                app:layout_constraintStart_toEndOf="@+id/cb_basophil"
-                app:layout_constraintTop_toBottomOf="@+id/cb_band" />
-
-            <CheckBox
-                android:id="@+id/cb_lymphoblast"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Lymphoblast"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_basophil" />
-
-            <CheckBox
-                android:id="@+id/cb_lymphocyte"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Lymphocyte"
-                app:layout_constraintStart_toEndOf="@+id/cb_lymphoblast"
-                app:layout_constraintTop_toBottomOf="@+id/cb_eosinophil" />
-
-            <CheckBox
-                android:id="@+id/cb_metamyelocyte"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Metamyelocyte"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_lymphoblast" />
-
-            <CheckBox
-                android:id="@+id/cb_monocyte"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Monocyte"
-                app:layout_constraintStart_toEndOf="@+id/cb_metamyelocyte"
-                app:layout_constraintTop_toBottomOf="@+id/cb_lymphocyte" />
-
-            <CheckBox
-                android:id="@+id/cb_myeloblast"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Myeloblast"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_metamyelocyte" />
-
-            <CheckBox
-                android:id="@+id/cb_myelocyte"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Myelocyte"
-                app:layout_constraintStart_toEndOf="@+id/cb_myeloblast"
-                app:layout_constraintTop_toBottomOf="@+id/cb_monocyte" />
-
-            <CheckBox
-                android:id="@+id/cb_neutrophil"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Neutrophil"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_myeloblast" />
-
-            <CheckBox
-                android:id="@+id/cb_nrbc"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="NRBC"
-                app:layout_constraintStart_toEndOf="@+id/cb_neutrophil"
-                app:layout_constraintTop_toBottomOf="@+id/cb_myelocyte" />
-
-            <CheckBox
-                android:id="@+id/cb_promyelocyte"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Promyelocyte"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_neutrophil" />
-
-            <TextView
-                android:id="@+id/lbl_order"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="20dp"
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cb_promyelocyte" />
+                app:layout_constraintTop_toBottomOf="@id/spinner_cellsToBeCounted">
+
+                <LinearLayout
+                    android:id="@+id/ll_cells"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/spinner_cellsToBeCounted"></LinearLayout>
+            </ScrollView>
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
@@ -251,5 +122,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/lbl_order"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/btn_save"
+        tools:layout_editor_absoluteY="667dp" />
 
 </android.support.constraint.ConstraintLayout>

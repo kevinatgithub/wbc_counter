@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             app:navigationIcon="@drawable/ic_arrow_left_w"
-            app:title="PATIENT"
+            app:title="PATIENT INFO"
             app:titleTextColor="#ffffff" />
     </android.support.design.widget.AppBarLayout>
 

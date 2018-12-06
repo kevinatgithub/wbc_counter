@@ -15,8 +15,8 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_password_w"
-            app:title="REGISTER"
+            app:navigationIcon="@drawable/ic_menu_w"
+            app:title="PATIENTS"
             app:titleTextColor="#ffffff"/>
     </android.support.design.widget.AppBarLayout>
 

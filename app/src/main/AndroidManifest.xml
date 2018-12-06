@@ -6,6 +6,10 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -13,14 +17,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.1CYTE">
-        <activity
-            android:name=".Login"
-            android:screenOrientation="portrait">
+
+        <activity android:name=".Intro" android:screenOrientation="portrait">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Login"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Register"
@@ -47,9 +55,12 @@
             android:name=".Counter8"
             android:screenOrientation="landscape" />
         <activity
-            android:name=".CountResult"
-            android:screenOrientation="portrait" />
-        <activity android:name=".BloodCellReferences" android:screenOrientation="landscape"></activity>
+            android:name=".Counter12"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name=".CountResult" />
+        <activity android:name=".BloodCellReferences" />
+        <activity android:name=".RegisterReference" />
     </application>
 
 </manifest>

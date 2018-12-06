@@ -1,27 +1,15 @@
 package com.bobongmd.app.a1cytewbcdifferentialcounter;
 
-import android.content.Intent;
-import android.os.Build;
-import android.speech.tts.TextToSpeech;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
+
 import android.os.Bundle;
-import android.support.v7.widget.CardView;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import org.json.JSONObject;
-
-import java.util.ArrayList;
-
-public class Counter6 extends Counter{
+public class Counter12 extends Counter {
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_counter6);
+        setContentView(R.layout.activity_counter12);
 
         lbl_status = findViewById(R.id.lbl_status);
         lbl_last = findViewById(R.id.lbl_last);
@@ -45,4 +33,6 @@ public class Counter6 extends Counter{
 
         implementFABClicks();
     }
+
+
 }

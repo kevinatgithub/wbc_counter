@@ -3,11 +3,13 @@ package com.bobongmd.app.a1cytewbcdifferentialcounter;
 public class BloodCell {
 
     private String name;
-    private String shortName;
+    private String shortname;
+    private String img;
 
-    public BloodCell(String name, String shortName) {
+    public BloodCell(String name, String shortname, String img) {
         this.name = name;
-        this.shortName = shortName;
+        this.shortname = shortname;
+        this.img = img;
     }
 
     public String getName() {
@@ -18,11 +20,19 @@ public class BloodCell {
         this.name = name;
     }
 
-    public String getShortName() {
-        return shortName;
+    public String getShortname() {
+        return shortname;
     }
 
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
+    public void setShortname(String shortname) {
+        this.shortname = shortname;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
     }
 }

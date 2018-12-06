@@ -1,11 +1,19 @@
 
 package com.bobongmd.app.a1cytewbcdifferentialcounter;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,7 +24,9 @@ import android.widget.TextView;
 import com.google.gson.Gson;
 
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
+import java.lang.ref.Reference;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,16 +40,28 @@ public class PatientList extends AppCompatActivity {
     private TextView lbl_no_patients;
     private FloatingActionButton fab_new_patient;
 
+    private DrawerLayout dl_patient_list;
+    private ActionBarDrawerToggle toggle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_patient_list);
-        Toolbar toolbar = findViewById(R.id.app_bar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.patient_list_container);
 
         api = new ApiCallManager(this);
         session = new Session(this);
         gson = new Gson();
+
+        Toolbar toolbar = findViewById(R.id.app_bar);
+        setSupportActionBar(toolbar);
+
+        dl_patient_list = findViewById(R.id.dl_patient_list);
+        toggle = new ActionBarDrawerToggle(this,dl_patient_list,toolbar, R.string.drawer_open,R.string.drawer_closed);
+        dl_patient_list.addDrawerListener(toggle);
+
+        provideDrawerOnClickListeners();
+
+
         lv_patients = findViewById(R.id.lv_patients);
         lv_patients.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,13 +87,58 @@ public class PatientList extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    private void provideDrawerOnClickListeners() {
+        NavigationView navView = findViewById(R.id.nv_drawer);
+        View headerView = navView.getHeaderView(0);
+
+        TextView txt_drawer_user_fullname = headerView.findViewById(R.id.txt_drawer_user_fullname);
+        TextView txt_drawer_user_designation = headerView.findViewById(R.id.txt_drawer_user_designation);
+        User user = session.getUser();
+        txt_drawer_user_fullname.setText(user.getFull_name());
+        txt_drawer_user_designation.setText(user.getDesignation());
+
+        navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                int id = menuItem.getItemId();
+                switch (id){
+                    case R.id.nav_references:
+                        Intent intent = new Intent(getApplicationContext(), BloodCellReferences.class);
+                        startActivity(intent);
+                        break;
+                    case R.id.nav_logout:
+                        confirmLogout();
+                        break;
+                }
+                return false;
+            }
+        });
+    }
+
+    private void confirmLogout() {
+        AlertDialog dialog = new AlertDialog.Builder(this).create();
+        dialog.setTitle("Logout");
+        dialog.setMessage("Do you want to logout?");
+        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                performLogout();
+            }
+        });
+        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        dialog.show();
+    }
+
+    private void performLogout() {
         session.removeUser();
         Intent intent = new Intent(this,Login.class);
         startActivity(intent);
         finish();
-        return super.onOptionsItemSelected(item);
     }
 
     @Override

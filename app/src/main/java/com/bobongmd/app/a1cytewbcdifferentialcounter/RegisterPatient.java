@@ -2,6 +2,7 @@ package com.bobongmd.app.a1cytewbcdifferentialcounter;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.icu.util.Calendar;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TextInputLayout;
@@ -21,6 +22,9 @@ import com.google.gson.Gson;
 
 import org.json.JSONObject;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 public class RegisterPatient extends AppCompatActivity {
 
     private Session session;
@@ -38,6 +42,7 @@ public class RegisterPatient extends AppCompatActivity {
     private EditText txt_diagnosis;
     private TextInputLayout tl_wbc;
     private EditText txt_wbc;
+    private TextView lbl_age;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -51,6 +56,7 @@ public class RegisterPatient extends AppCompatActivity {
         api = new ApiCallManager(this);
         gson = new Gson();
 
+        lbl_age = findViewById(R.id.lbl_age);
         tl_patient_id = findViewById(R.id.tl_patient_id);
         txt_patient_id = findViewById(R.id.txt_patient_id);
         tl_firstname = findViewById(R.id.tl_firstname);
@@ -67,9 +73,13 @@ public class RegisterPatient extends AppCompatActivity {
         datePickerDialog.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                lbl_age.setText(getAge(i,i1,i2) + " years old");
                 String m = i1 < 10 ? "0" + i1 : "" +i1;
                 String d = i2 < 10 ? "0" + i2 : "" + i2;
-                txt_dob.setText(i+"-"+m+"-"+d);
+                String dob = i+"-"+m+"-"+d;
+                txt_dob.setText(dob);
+//                lbl_age.setText(calculateAge());
+
             }
         });
         ImageView img_dob = findViewById(R.id.img_dob);
@@ -119,6 +129,16 @@ public class RegisterPatient extends AppCompatActivity {
     }
 
     private void doClear() {
+        if(getIntent().getStringExtra("update") == null){
+            txt_patient_id.setText("");
+            txt_firstname.setText("");
+            txt_surname.setText("");
+            txt_dob.setText("Tap the Calendar to Select Date");
+            txt_diagnosis.setText("");
+            txt_wbc.setText("");
+        }else{
+            populateForm();
+        }
     }
 
     private void validateForm() {
@@ -207,5 +227,24 @@ public class RegisterPatient extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         finish();
         return super.onOptionsItemSelected(item);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private String getAge(int year, int month, int day){
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.set(year, month, day);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+            age--;
+        }
+
+        Integer ageInt = new Integer(age);
+        String ageS = ageInt.toString();
+
+        return ageS;
     }
 }

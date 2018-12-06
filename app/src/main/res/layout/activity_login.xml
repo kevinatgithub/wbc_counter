@@ -15,7 +15,7 @@
             android:id="@+id/app_bar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:title="LOGIN"
+            app:title="USER LOGIN"
             app:titleTextColor="#ffffff" />
     </android.support.design.widget.AppBarLayout>
 

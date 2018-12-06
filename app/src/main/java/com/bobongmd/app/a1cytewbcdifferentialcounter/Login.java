@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 public class Login extends AppCompatActivity {
 
+    private ApiCallManager api;
     private Session session;
     private Gson gson;
     private TextInputLayout tl_user_id;
@@ -31,6 +32,7 @@ public class Login extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
 
+        api = new ApiCallManager(this);
         session = new Session(this);
         gson = new Gson();
         tl_user_id = findViewById(R.id.tl_user_id);
@@ -78,7 +80,6 @@ public class Login extends AppCompatActivity {
         String user_id = txt_user_id.getText().toString();
         String password = txt_password.getText().toString();
 
-        ApiCallManager api = new ApiCallManager(this);
         api.login(new CallbackWithResponse() {
             @Override
             public void execute(JSONObject response) {
@@ -106,6 +107,15 @@ public class Login extends AppCompatActivity {
 
     @Override
     protected void onResume() {
+
+        api.getCells(new CallbackWithResponse() {
+            @Override
+            public void execute(JSONObject response) {
+                BloodCellCollection collection = gson.fromJson(response.toString(),BloodCellCollection.class);
+                session.setCellCollection(collection);
+            }
+        });
+
         User user = session.getUser();
         if(user != null){
             Intent intent = new Intent(this,PatientList.class);

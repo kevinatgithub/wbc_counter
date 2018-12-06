@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".ShowServerResponse">
 
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="NETWORK ERROR"
+            app:titleTextColor="#ffffff" />
+    </android.support.design.widget.AppBarLayout>
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="100dp"

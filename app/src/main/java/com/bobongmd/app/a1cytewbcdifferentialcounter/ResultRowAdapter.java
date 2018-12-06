@@ -34,7 +34,7 @@ public class ResultRowAdapter extends ArrayAdapter<ResultItem> {
         lbl_cell.setText(result.getCell());
         lbl_count.setText(result.getCountValue() + "");
         lbl_percentage.setText(result.getPercentage() + "%");
-        lbl_absolute.setText(result.getAbsolute()+"");
+        lbl_absolute.setText(Math.round(result.getAbsolute())+"");
 
         return convertView;
     }

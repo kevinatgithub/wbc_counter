@@ -67,4 +67,21 @@ public class Session {
         prefs.edit().remove("diff").commit();
     }
 
+    public void setCellCollection(BloodCellCollection collection){
+        String jsonValue = gson.toJson(collection);
+        prefs.edit().putString("cells",jsonValue).commit();
+    }
+
+    public BloodCellCollection getCellCollection(){
+        String jsonValue = prefs.getString("cells","");
+        if(jsonValue.equals("")){
+            return null;
+        }
+        return gson.fromJson(jsonValue,BloodCellCollection.class);
+    }
+
+    public void removeCellCollection(){
+        prefs.edit().remove("cells").commit();
+    }
+
 }
