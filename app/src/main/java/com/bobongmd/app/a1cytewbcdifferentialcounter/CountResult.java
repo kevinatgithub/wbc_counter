@@ -32,7 +32,7 @@ public class CountResult extends AppCompatActivity {
             float y = new Float(r.getCountValue());
             float percentage = y/x;
             float percentage2 = percentage*100;
-            float absolute = percentage*new Integer(patient.getWbc());
+            float absolute = percentage*new Float(patient.getWbc());
             results.add(new ResultItem(
                     r.getBloodCell().getName(),
                     r.getCountValue(),

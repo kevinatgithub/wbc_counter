@@ -32,16 +32,16 @@ import java.util.Map;
 
 public class ApiCallManager {
 
-    private final String API_LOGIN = "http://bobong.getsandbox.com/login";
-    private final String API_REGISTER = "http://bobong.getsandbox.com/register";
-    private final String API_CHECK_USER_ID = "http://bobong.getsandbox.com/checkuserid/[USER_ID]";
-    private final String API_PATIENTS = "http://bobong.getsandbox.com/patients";
-    private final String API_PATIENT_INFO = "http://bobong.getsandbox.com/patient/info/[PATIENT_ID]";
-    private final String API_PATIENT_REGISTER = "http://bobong.getsandbox.com/patient/register";
-    private final String API_UPDATE_PATIENT = "http://bobong.getsandbox.com/patient/update";
-    private final String API_DELETE_PATIENT = "http://bobong.getsandbox.com/patient";
-    private final String API_GET_CELLS = "http://bobong.getsandbox.com/cells";
-    private final String API_CELL = "http://bobong.getsandbox.com/cell";
+    private final String API_LOGIN = "http://b0b0ng.getsandbox.com/login";
+    private final String API_REGISTER = "http://b0b0ng.getsandbox.com/register";
+    private final String API_CHECK_USER_ID = "http://b0b0ng.getsandbox.com/checkuserid/[USER_ID]";
+    private final String API_PATIENTS = "http://b0b0ng.getsandbox.com/patients";
+    private final String API_PATIENT_INFO = "http://b0b0ng.getsandbox.com/patient/info/[PATIENT_ID]";
+    private final String API_PATIENT_REGISTER = "http://b0b0ng.getsandbox.com/patient/register";
+    private final String API_UPDATE_PATIENT = "http://b0b0ng.getsandbox.com/patient/update";
+    private final String API_DELETE_PATIENT = "http://b0b0ng.getsandbox.com/patient";
+    private final String API_GET_CELLS = "http://b0b0ng.getsandbox.com/cells";
+    private final String API_CELL = "http://b0b0ng.getsandbox.com/cell";
 
     private Activity activity;
     private RequestQueue requestQueue;
